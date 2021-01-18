@@ -29,7 +29,7 @@ const DefaultBooleanRenderer = (bool) => ValueRendererFactory(bool ? 'true' : 'f
 
 const DefaultNullRenderer = () => ValueRendererFactory('null', 'null', ['value'])
 
-const DefaultDateObjRenderer = (date) => ValueRendererFactory(date.toLocaleString(), 'date', ['value'])
+const DefaultDateRenderer = (date) => ValueRendererFactory(date.toLocaleString(), 'date', ['value'])
 
 const DefaultKeyRenderer = (key) => ValueRendererFactory(key, 'button', ['key'])
 
@@ -97,7 +97,7 @@ const DefaultRendererTemplate =
   , 'key': DefaultKeyRenderer
   , 'object': DefaultObjectRenderer
   , 'array': DefaultArrayRenderer
-  , 'date': DefaultDateObjRenderer
+  , 'date': DefaultDateRenderer
   }
 
 const RenderJSON = (json, template=DefaultRendererTemplate) => {
