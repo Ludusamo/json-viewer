@@ -8,6 +8,7 @@ const getValueType = (val) => {
   const type = typeof(val)
   if (type === 'object') {
     if (Array.isArray(val)) return 'array'
+    if (val instanceof Date) return 'date'
     if (!val) return 'null'
   }
   return type
@@ -15,7 +16,7 @@ const getValueType = (val) => {
 
 const ValueRendererFactory = (ele, eleName, classes=[]) => {
   let e = document.createElement(eleName)
-  classes.forEach(c => e.classList.add(c))
+  e.classList.add(...classes)
   e.innerHTML = ele
   return e
 }
@@ -27,6 +28,8 @@ const DefaultStringRenderer = (str) => ValueRendererFactory(str, 'string', ['val
 const DefaultBooleanRenderer = (bool) => ValueRendererFactory(bool ? 'true' : 'false', 'boolean', ['value'])
 
 const DefaultNullRenderer = () => ValueRendererFactory('null', 'null', ['value'])
+
+const DefaultDateObjRenderer = (date) => ValueRendererFactory(date.toLocaleString(), 'date', ['value'])
 
 const DefaultKeyRenderer = (key) => ValueRendererFactory(key, 'button', ['key'])
 
@@ -94,9 +97,10 @@ const DefaultRendererTemplate =
   , 'key': DefaultKeyRenderer
   , 'object': DefaultObjectRenderer
   , 'array': DefaultArrayRenderer
+  , 'date': DefaultDateObjRenderer
   }
 
-const RenderJSON = (json, template=DefaultRendererTemplate, spec=null) => {
+const RenderJSON = (json, template=DefaultRendererTemplate) => {
   const type = getValueType(json)
   if (!validateRendererTemplate(template)) throw 'InvalidRenderer'
   return template[type](json)
