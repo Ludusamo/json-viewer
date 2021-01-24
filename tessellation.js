@@ -21,25 +21,25 @@ const ValueRendererFactory = (ele, eleName, classes=[]) => {
   return e
 }
 
-const DefaultNumberRenderer = (num) => ValueRendererFactory(num, 'number', ['value'])
+const DefaultNumberRenderer = (num) => ValueRendererFactory(num, 'tess-number', ['tess-value'])
 
-const DefaultStringRenderer = (str) => ValueRendererFactory(str, 'string', ['value'])
+const DefaultStringRenderer = (str) => ValueRendererFactory(str, 'tess-string', ['tess-value'])
 
-const DefaultBooleanRenderer = (bool) => ValueRendererFactory(bool ? 'true' : 'false', 'boolean', ['value'])
+const DefaultBooleanRenderer = (bool) => ValueRendererFactory(bool ? 'true' : 'false', 'tess-boolean', ['tess-value'])
 
-const DefaultNullRenderer = () => ValueRendererFactory('null', 'null', ['value'])
+const DefaultNullRenderer = () => ValueRendererFactory('null', 'null', ['tess-value'])
 
-const DefaultDateRenderer = (date) => ValueRendererFactory(date.toLocaleString(), 'date', ['value'])
+const DefaultDateRenderer = (date) => ValueRendererFactory(date.toLocaleString(), 'tess-date', ['tess-value'])
 
-const DefaultKeyRenderer = (key) => ValueRendererFactory(key, 'button', ['key'])
+const DefaultKeyRenderer = (key) => ValueRendererFactory(key, 'button', ['tess-key'])
 
 const DefaultArrayRenderer = (arr) => {
-  let container = document.createElement('array')
-  container.classList.add('container-obj')
+  let container = document.createElement('tess-array')
+  container.classList.add('tess-container-obj')
   arr.forEach(v => {
     let val = DefaultRendererTemplate[getValueType(v)](v)
     container.appendChild(val)
-    val.classList.add('list-item')
+    val.classList.add('tess-list-item')
   })
   return container
 }
@@ -49,26 +49,26 @@ let DefaultObjectRenderer = (obj) => {
     { 'object': true
     , 'array': true
     }
-  let container = document.createElement('object')
-  container.classList.add('container-obj')
+  let container = document.createElement('tess-object')
+  container.classList.add('tess-container-obj')
   Object
     .entries(obj)
     .forEach(
       ([k, v]) => {
         let valueType = getValueType(v)
-        let kvEle = document.createElement('key-value')
+        let kvEle = document.createElement('tess-key-value')
         let key = DefaultRendererTemplate['key'](k)
         kvEle.appendChild(key)
         let val = DefaultRendererTemplate[valueType](v)
         kvEle.appendChild(val)
-        val.classList.add('value')
+        val.classList.add('tess-value')
 
         if (!collections[valueType]) {
-          kvEle.classList.add('side-by-side')
-          key.classList.add('side-by-side')
-          val.classList.add('side-by-side')
+          kvEle.classList.add('tess-side-by-side')
+          key.classList.add('tess-side-by-side')
+          val.classList.add('tess-side-by-side')
         } else {
-          key.classList.add('collapsible')
+          key.classList.add('tess-collapsible')
           addCollapsibleListener(key)
         }
         container.appendChild(kvEle)

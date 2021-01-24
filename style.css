@@ -1,0 +1,77 @@
+.tess-container-obj {
+  display: flex;
+  flex-direction: column;
+
+  padding: 1em;
+  border-radius: 1em;
+  border: solid;
+  border-color: black;
+  border-width: thin;
+  background-color: hsl(0, 0%, 70%);
+}
+
+tess-key-value {
+  margin: 0.5em;
+}
+
+.tess-key {
+  padding: 1em;
+  width: 100%;
+
+  background-color: hsl(0, 0%, 20%);
+  color: #fff;
+
+  border: solid;
+  border-color: black;
+  border-radius: 1em 1em 1em 1em;
+  border-width: thin;
+
+  text-align: left;
+}
+
+.tess-collapsible {
+  cursor: pointer;
+}
+
+.tess-collapsible:hover {
+  background-color: hsl(0, 0%, 40%);;
+}
+
+.active {
+  border-radius: 1em 1em 0em 0em;
+}
+
+.tess-value {
+  padding: 1em;
+  border: solid;
+  border-color: black;
+  border-width: thin;
+  background-color: hsl(0, 0%, 70%);
+}
+
+.tess-container-obj.tess-value {
+  border-radius: 0em 0em 1em 1em;
+  display: none;
+  overflow: hidden;
+}
+
+.tess-key.tess-side-by-side {
+  border-radius: 1em 0em 0em 1em;
+  width: auto;
+}
+
+.tess-value.tess-side-by-side {
+  border-radius: 0em 1em 1em 0em;
+  width: 100%;
+}
+
+tess-key-value.tess-side-by-side {
+  display: flex;
+}
+
+.tess-list-item {
+  border: solid;
+  border-color: black;
+  border-radius: 1em;
+  border-width: thin;
+}
